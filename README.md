@@ -22,10 +22,13 @@ dependencyResolutionManagement {
 
 ```kotlin
 dependencies {
-    implementation("com.github.OlukaDenis:spark-utils:Tag")
+    implementation("com.github.OlukaDenis:spark-utils:v0.0.1") // Use the exact tag from releases
 }
 ```
-Replace `Tag` with the latest version: ![](https://jitpack.io/v/OlukaDenis/spark-utils.svg)
+
+To find the latest version:
+1. Check the [Releases page](https://github.com/OlukaDenis/spark-utils/releases) for the latest tag
+2. Or visit [JitPack](https://jitpack.io/#OlukaDenis/spark-utils) to see all available versions
 
 ## Usage
 

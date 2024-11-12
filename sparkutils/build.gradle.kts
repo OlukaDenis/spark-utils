@@ -27,22 +27,22 @@ publishing {
     publications {
         register<MavenPublication>("gpr") {
             from(components["java"])
-//            groupId = "com.mcdenny"
-//            artifactId = "sparkutils"
-//            version = "0.0.1"
-            
+            groupId = "com.github.OlukaDenis"
+            artifactId = "spark-utils"
+            version = "0.0.2"
+
             pom {
                 name.set("Spark Utils")
                 description.set("A Kotlin library for common android utility methods.")
                 url.set("https://github.com/OlukaDenis/spark-utils")
-                
+                /**/
                 licenses {
                     license {
                         name.set("The Apache License, Version 2.0")
                         url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
                     }
                 }
-                
+
                 developers {
                     developer {
                         id.set("OlukaDenis")

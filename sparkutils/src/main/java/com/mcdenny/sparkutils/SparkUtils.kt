@@ -2,7 +2,7 @@ package com.mcdenny.sparkutils
 
 import java.text.DecimalFormat
 
-class SparkUtils {
+public class SparkUtils {
     companion object {
         @JvmStatic
         fun formatNumber(number: Double): String {
