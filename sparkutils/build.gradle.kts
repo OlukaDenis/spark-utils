@@ -30,7 +30,7 @@ publishing {
             // Optional: customize artifact names
             groupId = "com.mcdenny"
             artifactId = "sparkutils"
-            version = "1.0.0"
+            version = "1.0.1"
         }
     }
 
