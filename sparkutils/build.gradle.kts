@@ -24,7 +24,7 @@ publishing {
     }
     publications {
         register<MavenPublication>("gpr") {
-            from(components["release"])
+            from(components["java"])
             // Optional: customize artifact names
             groupId = "com.mcdenny"
             artifactId = "sparkutils"
