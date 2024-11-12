@@ -11,53 +11,24 @@ java {
     withSourcesJar()  // Creates sources JAR
 }
 
-// Define version and group for your library
-group = "com.mcdenny.sparkutils"  // Replace with your group ID
-version = "1.0.0"           // Replace with your version
-
 publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            from(components["java"])
-            
-            // Optional: Customize POM file
-            pom {
-                name.set("Spark Utils")
-                description.set("A set of common android utility methods")
-                url.set("https://bitbucket.org/McDenny15/spark-utils")
-                
-                licenses {
-                    license {
-                        name.set("MIT License")
-                        url.set("https://opensource.org/licenses/MIT")
-                        distribution.set("repo")
-                    }
-                }
-                
-                developers {
-                    developer {
-                        id.set("mcdenny")
-                        name.set("Denis Oluka")
-                        email.set("olukadeno@gmail.com")
-                    }
-                }
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/${project.property("github.owner")}/${project.property("github.repo")}")
+            credentials {
+                username = System.getenv("USERNAME")
+                password = System.getenv("TOKEN")
             }
         }
     }
-    
-    // Configure repository to publish to
-    repositories {
-        maven {
-            name = "SparkUtils"
-
-            val releasesRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-            val snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-            url = uri(if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl)
-            
-            credentials {
-                username = "olukadeno@gmail.com"
-                password = "v4*Nz*w^Z2RH"
-            }
+    publications {
+        register<MavenPublication>("gpr") {
+            from(components["release"])
+            // Optional: customize artifact names
+            groupId = "com.mcdenny"
+            artifactId = "sparkutils"
+            version = "1.0.0"
         }
     }
 }
