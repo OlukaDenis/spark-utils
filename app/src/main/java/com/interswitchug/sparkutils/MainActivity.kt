@@ -22,6 +22,5 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun content() {
-        SparkUtils.regularFunction()
     }
 }

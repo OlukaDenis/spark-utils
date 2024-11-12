@@ -25,7 +25,7 @@ publishing {
         }
     }
     publications {
-        register<MavenPublication>("gpr") {
+        create<MavenPublication>("gpr") {
             from(components["java"])
             groupId = "com.github.OlukaDenis"
             artifactId = "spark-utils"
@@ -35,7 +35,7 @@ publishing {
                 name.set("Spark Utils")
                 description.set("A Kotlin library for common android utility methods.")
                 url.set("https://github.com/OlukaDenis/spark-utils")
-                /**/
+
                 licenses {
                     license {
                         name.set("The Apache License, Version 2.0")
@@ -59,5 +59,9 @@ publishing {
         doFirst {
             println("Publishing with user: ${System.getenv("GITHUB_ACTOR")}")
         }
+    }
+
+    dependencies {
+        implementation(libs.kotlin.stdlib)
     }
 }
