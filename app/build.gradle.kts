@@ -46,5 +46,6 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation(project(":sparkutils"))
+//    implementation(project(":sparkutils"))
+    implementation("com.github.OlukaDenis:spark-utils:0.1.2")
 }

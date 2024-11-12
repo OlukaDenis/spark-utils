@@ -27,9 +27,9 @@ publishing {
     publications {
         create<MavenPublication>("gpr") {
             from(components["java"])
-            groupId = "com.github.OlukaDenis"
-            artifactId = "spark-utils"
-            version = "0.1.1"
+//            groupId = "com.github.OlukaDenis"
+//            artifactId = "spark-utils"
+//            version = "v0.1.2"
 
             pom {
                 name.set("Spark Utils")
