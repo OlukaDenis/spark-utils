@@ -29,7 +29,7 @@ publishing {
             from(components["java"])
 //            groupId = "com.mcdenny"
 //            artifactId = "sparkutils"
-//            version = "1.0.1"
+//            version = "0.0.1"
             
             pom {
                 name.set("Spark Utils")
