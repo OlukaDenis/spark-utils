@@ -1,0 +1,91 @@
+name: Release Library
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_type:
+        description: 'Version bump type'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - major
+          - minor
+          - patch
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          
+      - name: Get latest tag
+        id: get_latest_tag
+        run: |
+          latest_tag=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          echo "latest_tag=${latest_tag}" >> $GITHUB_OUTPUT
+          
+      - name: Bump version
+        id: bump_version
+        run: |
+          latest_tag=${{ steps.get_latest_tag.outputs.latest_tag }}
+          version=${latest_tag#v}  # Remove 'v' prefix
+          IFS='.' read -r major minor patch <<< "$version"
+          
+          case "${{ github.event.inputs.version_type }}" in
+            "major")
+              new_version="$((major + 1)).0.0"
+              ;;
+            "minor")
+              new_version="${major}.$((minor + 1)).0"
+              ;;
+            "patch")
+              new_version="${major}.${minor}.$((patch + 1))"
+              ;;
+          esac
+          
+          echo "new_version=v${new_version}" >> $GITHUB_OUTPUT
+          echo "version_number=${new_version}" >> $GITHUB_OUTPUT
+          
+      - name: Update version in build.gradle.kts
+        run: |
+          new_version=${{ steps.bump_version.outputs.new_version }}
+          version_number=${new_version#v}  # Remove 'v' prefix
+          sed -i "s/version = \".*\"/version = \"$version_number\"/" sparkutils/build.gradle.kts
+          
+      - name: Build with Gradle
+        run: ./gradlew build
+          
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add sparkutils/build.gradle.kts
+          git commit -m "Bump version to ${{ steps.bump_version.outputs.new_version }}"
+          git tag -a ${{ steps.bump_version.outputs.new_version }} -m "Release ${{ steps.bump_version.outputs.new_version }}"
+          git push
+          git push --tags
+          
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.bump_version.outputs.new_version }}
+          name: Release ${{ steps.bump_version.outputs.new_version }}
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+          files: |
+            sparkutils/build/libs/*.jar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
