@@ -32,6 +32,6 @@ jobs:
         env:
           GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo "Using actor: $GITHUB_ACTOR"
-          ./gradlew publish --stacktrace 
+          run: |
+            echo "Using actor: $GITHUB_ACTOR"
+            ./gradlew publish --stacktrace
