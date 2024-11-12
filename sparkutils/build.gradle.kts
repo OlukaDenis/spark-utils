@@ -15,7 +15,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/${project.property("github.owner")}/${project.property("github.repo")}")
+            url = uri("https://maven.pkg.github.com/OlukaDenis/spark-utils")
             credentials {
                 username = System.getenv("USERNAME")
                 password = System.getenv("TOKEN")
