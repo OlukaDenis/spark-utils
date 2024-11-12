@@ -63,6 +63,9 @@ jobs:
           new_version=${{ steps.bump_version.outputs.new_version }}
           version_number=${new_version#v}  # Remove 'v' prefix
           sed -i "s/version = \".*\"/version = \"$version_number\"/" sparkutils/build.gradle.kts
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
           
       - name: Build with Gradle
         run: ./gradlew build

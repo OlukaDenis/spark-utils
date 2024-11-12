@@ -27,6 +27,9 @@ publishing {
     publications {
         register<MavenPublication>("gpr") {
             from(components["java"])
+//            groupId = "com.mcdenny"
+//            artifactId = "sparkutils"
+//            version = "1.0.1"
             
             pom {
                 name.set("Spark Utils")
@@ -42,7 +45,7 @@ publishing {
                 
                 developers {
                     developer {
-                        id.set("olukadenis")
+                        id.set("OlukaDenis")
                         name.set("Denis Oluka")
                         email.set("olukadeno@gmail.com")
                     }
