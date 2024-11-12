@@ -17,8 +17,10 @@ publishing {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/OlukaDenis/spark-utils")
             credentials {
-                username = System.getenv("USERNAME")
-                password = System.getenv("TOKEN")
+                username =
+                    project.findProperty("gpr.user") as String? ?: System.getenv("GITHUB_ACTOR")
+                password =
+                    project.findProperty("gpr.key") as String? ?: System.getenv("GITHUB_TOKEN")
             }
         }
     }
@@ -29,6 +31,13 @@ publishing {
             groupId = "com.mcdenny"
             artifactId = "sparkutils"
             version = "1.0.0"
+        }
+    }
+
+    // Add this to ensure credentials are available during configuration
+    tasks.withType<PublishToMavenRepository> {
+        doFirst {
+            println("Publishing with user: ${System.getenv("GITHUB_ACTOR")}")
         }
     }
 }
