@@ -1,6 +1,8 @@
 package com.interswitchug.sparkutils
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -22,6 +24,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun content() {
-        SparkUtils.formatNumber()
+        val date = "2024-09-08T14:54:00.85ZZ"
+        val view = findViewById<TextView>(R.id.mtView)
+        Log.d("MainActivity", "Formatted:::: " + SparkUtils.formatDateTime(date))
+        view.text = SparkUtils.formatDateTime(date, "hh:mm ss")
     }
 }
