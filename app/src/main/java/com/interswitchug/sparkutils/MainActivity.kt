@@ -22,6 +22,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun content() {
-
+        SparkUtils.formatNumber()
     }
 }
