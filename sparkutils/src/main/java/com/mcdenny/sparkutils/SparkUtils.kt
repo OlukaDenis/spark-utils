@@ -100,7 +100,7 @@ object SparkUtils {
     }
 
     @JvmStatic
-    fun formatDateTime(inputDate: String?, pattern: String = "yyyy-MM-dd HH:mm:ss a"): String {
+    fun formatDate(inputDate: String?, pattern: String = "yyyy-MM-dd HH:mm:ss a"): String {
         if (isNullOrEmpty(inputDate)) return "";
         val formats = arrayOf(
             "yyyy-MM-dd'T'HH:mm:ss.SSSS",
