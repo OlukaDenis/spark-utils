@@ -3,7 +3,9 @@ package com.mcdenny.sparkutils
 import java.security.SecureRandom
 import java.text.DateFormat
 import java.text.DecimalFormat
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
+import java.util.Currency
 import java.util.Date
 import java.util.Locale
 
@@ -27,6 +29,16 @@ object SparkUtils {
     }
 
     @JvmStatic
+    @JvmOverloads
+    fun formatCurrency(value: Double, symbol: String? = "UGX", fractionDigits: Int = 0): String{
+        val format = NumberFormat.getCurrencyInstance()
+        format.maximumFractionDigits = fractionDigits
+        format.currency = Currency.getInstance(symbol)
+
+        return format.format(value)
+    }
+
+    @JvmStatic
     fun getRandomNumber(): String {
         val random = SecureRandom()
         val randomNumber = random.nextInt(100000000 - 100) + 100
@@ -36,6 +48,16 @@ object SparkUtils {
     @JvmStatic
     fun isNullOrEmpty(value: String?): Boolean {
         return value.isNullOrEmpty()
+    }
+
+    @JvmStatic
+    fun toKiloBytes(value: Long): Int {
+        return (value / 1024).toInt()
+    }
+
+    @JvmStatic
+    fun toMegaBytes(value: Long): Int {
+        return (value / 1024 / 1024).toInt()
     }
 
     @JvmStatic
@@ -140,4 +162,12 @@ object SparkUtils {
         }
     }
 
+    @JvmStatic
+    fun capitalize(value: String): String {
+        return value.replaceFirstChar {
+            if (it.isLowerCase()) it.titlecase(
+                Locale.getDefault()
+            ) else it.toString()
+        }
+    }
 }

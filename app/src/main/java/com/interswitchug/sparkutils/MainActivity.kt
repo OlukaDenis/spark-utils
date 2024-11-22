@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
     private fun content() {
         val date = "2024-09-08T14:54:00.85ZZ"
         val view = findViewById<TextView>(R.id.mtView)
-        Log.d("MainActivity", "Formatted:::: " + SparkUtils.formatDateTime(date))
-        view.text = SparkUtils.formatDateTime(date, "hh:mm ss")
+//        Log.d("MainActivity", "Formatted:::: " + SparkUtils.formatDateTime(date))
+//        view.text = SparkUtils.formatDateTime(date, "hh:mm ss")
     }
 }
