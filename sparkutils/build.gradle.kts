@@ -29,7 +29,7 @@ publishing {
             from(components["java"])
             groupId = "com.github.OlukaDenis"
             artifactId = "spark-utils"
-            version = "0.1.7"
+            version = "0.1.9"
 
             pom {
                 name.set("Spark Utils")
