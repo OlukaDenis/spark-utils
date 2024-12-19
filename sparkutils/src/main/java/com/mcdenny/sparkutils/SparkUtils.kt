@@ -170,4 +170,14 @@ object SparkUtils {
             ) else it.toString()
         }
     }
+
+    @JvmStatic
+    fun capitalizeWords(value: String): String {
+        return value.split(" ").joinToString(" ") { word ->
+            //convert each word to small case inside the lambda
+            val smallCaseWord = word.lowercase()
+            //finish off by capitalizing to title case
+            smallCaseWord.replaceFirstChar(Char::titlecaseChar)
+        }
+    }
 }

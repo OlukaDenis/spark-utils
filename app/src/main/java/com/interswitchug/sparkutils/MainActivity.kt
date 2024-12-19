@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        content();
+        content()
     }
 
     private fun content() {
@@ -28,5 +28,7 @@ class MainActivity : AppCompatActivity() {
         val view = findViewById<TextView>(R.id.mtView)
 //        Log.d("MainActivity", "Formatted:::: " + SparkUtils.formatDateTime(date))
 //        view.text = SparkUtils.formatDateTime(date, "hh:mm ss")
+        val m = SparkUtils.capitalizeWords("interswitch")
+        Log.d("DENIS", "Capitalize: $m")
     }
 }
