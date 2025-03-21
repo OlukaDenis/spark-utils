@@ -21,10 +21,10 @@ package com.mcdenny.sparkutils.models
  * - The default alignment is center
  */
 data class ReceiptHeaderModel(
-    var type: String = "TEXT",
-    var text: String = "",
-    var image: String = "",
-    var isBold: Boolean = false,
-    var alignment: String = "CENTER",
-    var divider: String = ""
+  var type: String = "TEXT",
+  var text: String = "",
+  var image: String = "",
+  var isBold: Boolean = false,
+  var alignment: String = "CENTER",
+  var divider: String = ""
 )

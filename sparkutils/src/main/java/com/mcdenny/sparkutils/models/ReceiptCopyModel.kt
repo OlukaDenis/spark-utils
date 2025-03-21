@@ -11,7 +11,7 @@ package com.mcdenny.sparkutils.models
  * - "RIGHT": Aligns the content to the right.
  */
 data class ReceiptCopyModel(
-    var name: String = "",
-    var isBold: Boolean = false,
-    var alignment: String = ""
+  var name: String = "",
+  var isBold: Boolean = false,
+  var alignment: String = ""
 )
