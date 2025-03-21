@@ -12,9 +12,12 @@ package com.mcdenny.sparkutils.models
  * - "BETWEEN": Aligns the content to the right and left.
  */
 data class ReceiptItemModel(
-    var key: String = "",
-    var position: Int = 0,
-    var value: String = "",
-    var isBold: Boolean = false,
-    var alignment: String = "BETWEEN"
-)
+   var key: String = "",
+   var position: Int = 0,
+  var value: String = "",
+  var isBold: Boolean = false,
+  var alignment: String = "BETWEEN"
+) {
+    constructor(key: String, position: Int, value: String) : this(key, position, value, false, "BETWEEN")
+    constructor(key: String, position: Int, value: String, isBold: Boolean) : this(key, position, value, isBold, "BETWEEN")
+}
