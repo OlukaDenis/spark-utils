@@ -1,0 +1,36 @@
+name: Publish to JitPack
+
+on:
+  push:
+    tags:
+      - 'v*' # Triggers on tags like v1.0.0, v2.0.0, etc.
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17' # Use the appropriate JDK version for your project
+          distribution: 'temurin'
+
+      - name: Build the project
+        run: ./gradlew build # Use the appropriate build command for your project
+
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        with:
+          tag_name: v${{ github.run_number }} # Use a unique tag name
+          release_name: Release v${{ github.run_number }}
+          draft: false
+          prerelease: false
+
+      - name: Publish to JitPack
+        run: |
+          echo "Publishing to JitPack..."
+          echo "JitPack will automatically build and publish the library when a new tag is pushed."
