@@ -12,6 +12,9 @@ on:
           - major
           - minor
           - patch
+  push:
+    branches:
+      - main # Trigger on push to the main branch
 
 jobs:
   release:
@@ -55,7 +58,7 @@ jobs:
               ;;
           esac
           
-          echo "new_version=v${new_version}" >> $GITHUB_OUTPUT
+          echo "new_version=${new_version}" >> $GITHUB_OUTPUT
           echo "version_number=${new_version}" >> $GITHUB_OUTPUT
           
       - name: Update version in build.gradle.kts
