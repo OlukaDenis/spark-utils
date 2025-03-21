@@ -1,9 +1,12 @@
 name: Publish to JitPack
 
 on:
+  workflow_dispatch: # Allows manual triggering
   push:
     tags:
       - 'v*' # Triggers on tags like v1.0.0, v2.0.0, etc.
+    branches:
+      - main # Trigger on push to the main branch
 
 jobs:
   publish:
