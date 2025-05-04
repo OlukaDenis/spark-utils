@@ -89,7 +89,7 @@ object SparkUtils {
         val textChars = this.toCharArray()
         val end = this.length - endDigits
         for (i in textChars.indices) {
-            if (i in startDigits..<end) {
+            if (i in startDigits until end) {
                 textChars[i] = '*'
             }
         }
