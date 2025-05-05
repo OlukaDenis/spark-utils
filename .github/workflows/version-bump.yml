@@ -26,19 +26,25 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          
+
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
           java-version: '11'
           distribution: 'temurin'
-          
+
       - name: Get latest tag
         id: get_latest_tag
         run: |
-          latest_tag=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
-          echo "latest_tag=${latest_tag}" >> $GITHUB_OUTPUT
+          latest_tag=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.1.11")
           
+          # fallback if tag is just "v" or invalid
+          if [[ "$latest_tag" == "v" || ! "$latest_tag" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            latest_tag="v0.1.11"
+          fi
+          
+          echo "latest_tag=$latest_tag" >> $GITHUB_OUTPUT
+
       - name: Bump version
         id: bump_version
         run: |
@@ -62,7 +68,7 @@ jobs:
           
           echo "new_version=v${new_version}" >> $GITHUB_OUTPUT
           echo "version_number=${new_version}" >> $GITHUB_OUTPUT
-          
+
       - name: Update version in build.gradle.kts
         run: |
           new_version=${{ steps.bump_version.outputs.new_version }}
@@ -78,10 +84,10 @@ jobs:
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-          
+
       - name: Build with Gradle
         run: ./gradlew build
-          
+
       - name: Commit and push changes
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
@@ -91,7 +97,7 @@ jobs:
           git tag -a ${{ steps.bump_version.outputs.new_version }} -m "Release ${{ steps.bump_version.outputs.new_version }}"
           git push
           git push --tags
-          
+
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
