@@ -45,6 +45,8 @@ jobs:
           latest_tag=${{ steps.get_latest_tag.outputs.latest_tag }}
           version=${latest_tag#v}  # Remove 'v' prefix
           IFS='.' read -r major minor patch <<< "$version"
+
+          version_type=${{ github.event.inputs.version_type || 'patch' }}
           
           case "${{ github.event.inputs.version_type }}" in
             "major")
